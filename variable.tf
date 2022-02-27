@@ -10,7 +10,11 @@ variable "main_project_phase" {
   description = "Project Phase. Example - Development / Staging / Production"
 }
 
-variable "main_instance_list" {
+variable "main_node_list" {
+  type = set(string)
+}
+
+variable "main_master_list" {
   type = set(string)
 }
 

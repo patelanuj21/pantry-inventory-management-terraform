@@ -8,7 +8,7 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "instance_list" {
+variable "node_list" {
   type = set(string)
 }
 
