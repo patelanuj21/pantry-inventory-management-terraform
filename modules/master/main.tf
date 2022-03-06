@@ -57,7 +57,7 @@ module "ec2_instance" {
 }
 
 resource "aws_security_group" "master_security_group" {
-  name        = join(" - ", ["TF", var.project_name, var.project_phase, "Master"])
+  name        = join("-", ["TF", var.project_name, var.project_phase, "Master"])
   description = "Security Group for Master servers on ${var.project_phase} environments"
 
   ingress {

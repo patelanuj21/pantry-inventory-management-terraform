@@ -6,10 +6,6 @@ variable "main_region" {
 variable "main_project_name" {
 }
 
-variable "main_project_phase" {
-  description = "Project Phase. Example - Development / Staging / Production"
-}
-
 variable "main_node_list" {
   type = set(string)
 }

@@ -9,8 +9,8 @@ module "nodes" {
   node_list     = var.main_node_list
   is_terraform  = true
   project_name  = var.main_project_name
-  project_phase = var.main_project_phase
-  key_name      = join(" - ", [var.main_project_name, var.main_project_phase])
+  project_phase = local.main_project_phase
+  key_name      = join(" - ", [var.main_project_name, local.main_project_phase])
 
 }
 
@@ -21,7 +21,7 @@ module "master" {
   master_list   = var.main_master_list
   is_terraform  = true
   project_name  = var.main_project_name
-  project_phase = var.main_project_phase
-  key_name      = join(" - ", [var.main_project_name, var.main_project_phase])
+  project_phase = local.main_project_phase
+  key_name      = join(" - ", [var.main_project_name, local.main_project_phase])
 
 }
