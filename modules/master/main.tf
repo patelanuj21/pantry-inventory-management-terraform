@@ -43,9 +43,9 @@ module "ec2_instance" {
       sudo yum install git -y
       sudo yum install net-tools -y
       sudo useradd ansible
-      sudo usermod -aG wheel ansible
       sudo yum install epel-release -y
       sudo yum install ansible -y
+      sudo -H -u ansible bash -c 'cd ~ && git clone https://github.com/patelanuj21/pantry-inventory-management-ansible.git' 
       EOF
 
 

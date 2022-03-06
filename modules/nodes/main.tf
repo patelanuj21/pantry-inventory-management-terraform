@@ -41,7 +41,7 @@ module "ec2_instance" {
   user_data = <<-EOF
       #!/bin/sh
       sudo yum update -y
-      sudo useradd ansible
+      sudo yum install git -y
       EOF
 
 
