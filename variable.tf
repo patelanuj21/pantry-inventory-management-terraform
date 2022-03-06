@@ -4,6 +4,7 @@ variable "main_region" {
 }
 
 variable "main_project_name" {
+  type = string
 }
 
 variable "main_node_list" {
@@ -15,4 +16,5 @@ variable "main_master_list" {
 }
 
 variable "main_instance_type" {
+  type = string
 }
