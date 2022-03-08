@@ -38,14 +38,20 @@ module "ec2_instance" {
   vpc_security_group_ids = [aws_security_group.master_security_group.id]
 
   user_data = <<-EOF
-      #!/bin/sh
+      #!/bin/bash -xe
+      exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
       sudo yum update -y
-      sudo yum install git -y
-      sudo yum install net-tools -y
+      sudo yum install git net-tools epel-release -y
       sudo useradd ansible
-      sudo yum install epel-release -y
+      sudo usermod -aG wheel ansible
       sudo yum install ansible -y
-      sudo -H -u ansible bash -c 'cd ~ && git clone https://github.com/patelanuj21/pantry-inventory-management-ansible.git' 
+      sudo -u root bash -c "echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/wheel"
+      sudo -u ansible bash -c 'cd ~ && git clone https://github.com/patelanuj21/pantry-inventory-management-ansible.git'
+      sudo -u ansible bash -c "ssh-keygen -b 2048 -t rsa -f ~/.ssh/ansible -q -N ''"
+      sudo -u ansible bash -c "touch ~/.ssh/authorized_keys"
+      sudo -u ansible bash -c "chmod 600 ~/.ssh/authorized_keys"
+      sudo -u ansible bash -c "cat ~/.ssh/ansible.pub > ~/.ssh/authorized_keys"
+      sudo -u ansible bash -c "ansible-galaxy collection install ansible.posix"
       EOF
 
 
